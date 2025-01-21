@@ -81,6 +81,8 @@ void _reset_handler(void){
         *dst++ = 0;
     }
 
+    //__libc_init_array();
+
     SystemInit();
 
     main();

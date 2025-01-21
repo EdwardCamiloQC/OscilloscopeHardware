@@ -1,6 +1,10 @@
 #ifndef _MCG_H_
     #define _MCG_H_
 
+    #include <stdint.h>
+
+    extern uint32_t mcgOutClk_div;
+
     void mcg_preconfig();
     int mcg_fei();
     //----------------------

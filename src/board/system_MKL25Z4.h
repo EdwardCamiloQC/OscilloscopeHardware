@@ -40,7 +40,7 @@
  */
 
 #ifndef SYSTEM_MKL25Z4_H_
-#define SYSTEM_MKL25Z4_H_                        /**< Symbol preventing repeated inclusion */
+#define SYSTEM_MKL25Z4_H_
 
 #ifdef __cplusplus
 extern "C" {

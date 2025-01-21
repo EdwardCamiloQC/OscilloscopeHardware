@@ -1,10 +1,11 @@
 #include <pit.h>
 #include <MKL25Z4.h>
+#include <mcg.h>
 #include <sim.h>
 #include <nvic.h>
 #include <rgb.h>
 
-extern uint32_t SystemCoreClock;
+extern uint32_t mcgOutClk_div;
 
 void _irqHandler_PIT(void){
     if(pit_timerFlag(0, 0)){
@@ -17,7 +18,7 @@ void pit_init(uint32_t time_us){
     sim_systemClock_dac_rtc_adc_tpm_pit_dmamux_ftf(PIT, 1);
     pit_moduleControl(0, 0);
     // Calcular el valor de recarga del timer
-    uint32_t load_value = (SystemCoreClock * (time_us / 1000000)) - 1;
+    uint32_t load_value = (mcgOutClk_div * (time_us / 1000000)) - 1;
     
     // Cargar el valor del timer en el canal 0
     pit_timerLoadValue(load_value, 0);
@@ -60,7 +61,7 @@ void pit_timerControl(bool chn, bool tie, bool ten, bool n){
 bool pit_timerFlag(bool clean, bool n){
     bool reg;
     if(clean){
-        PIT_TFLG(0) = 0x00000000UL;
+        PIT_TFLG(n) = 0x00000001UL;
     }else{
         reg = PIT_TFLG(n) & PIT_TFLG_TIF_MASK;
         return reg;

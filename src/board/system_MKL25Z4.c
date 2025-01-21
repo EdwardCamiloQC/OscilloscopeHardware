@@ -91,12 +91,14 @@
    ---------------------------------------------------------------------------- */
 
 uint32_t SystemCoreClock = DEFAULT_SYSTEM_CLOCK;
+uint32_t mcgOutClk_div;
 
 /* ----------------------------------------------------------------------------
    -- SystemInit()
    ---------------------------------------------------------------------------- */
 
 void SystemInit (void) {
+  //int returnStatus = 0;
   #if(DISABLE_WDOG)
     sim_controlRegister(COP_DISABLED, 0, 0);  /* Disable the WDOG module */
   #endif
@@ -104,17 +106,18 @@ void SystemInit (void) {
     sim_systemClockDivider(OUTDIV1_DIVIDE_BY_1, OUTDIV4_DIVIDE_BY_3); /* Update system prescalers */
     mcg_fei();
   #elif (CLOCK_SETUP == 1)
-    sim_systemClock_portx_tsi_lptmr(PORTA, 1); /* Enable clock gate for ports to enable pin routing */
+    sim_systemClock_portx_tsi_lptmr(PORTA, 1);//Enable portA and configure PTA18, PTA19 for the cristal
     sim_systemClockDivider(OUTDIV1_DIVIDE_BY_1, OUTDIV4_DIVIDE_BY_2); /* Update system prescalers */
     port_pinControlRegisters(PORTA_BASE_PTR, 18, IRQ_DMA_DISABLE, PIN_DISABLE, LOW_DRIVE, FILTER_DISABLED, FAST_SLEW, DISABLED_PULL_RESISTOR, PULLDOWN);
     port_cleanFlagISF(PORTA_BASE_PTR, 18);
     port_pinControlRegisters(PORTA_BASE_PTR, 19, IRQ_DMA_DISABLE, PIN_DISABLE, LOW_DRIVE, FILTER_DISABLED, FAST_SLEW, DISABLED_PULL_RESISTOR, PULLDOWN);
     port_cleanFlagISF(PORTA_BASE_PTR, 19);
-    mcg_preconfig();
-    mcg_fei_to_fbe();
-    mcg_fbe_to_pbe();
-    mcg_pbe_to_pee();
+    /*returnStatus =*/ mcg_preconfig();
+    /*returnStatus =*/ mcg_fei_to_fbe();
+    /*returnStatus =*/ mcg_fbe_to_pbe();
+    /*returnStatus =*/ mcg_pbe_to_pee();
     SystemCoreClock = DEFAULT_SYSTEM_CLOCK;
+    mcgOutClk_div = SystemCoreClock / (1*2);
   #elif (CLOCK_SETUP == 2)
     sim_systemClock_portx_tsi_lptmr(PORTA, 1);  /* Enable clock gate for ports to enable pin routing */
     sim_systemClockDivider(OUTDIV1_DIVIDE_BY_2, OUTDIV4_DIVIDE_BY_2); /* Update system prescalers */
@@ -126,7 +129,7 @@ void SystemInit (void) {
     mcg_fbe_to_pbe();
     mcg_pbe_to_pee();
     SystemCoreClock = DEFAULT_SYSTEM_CLOCK;
-  #endif /* (CLOCK_SETUP == 2) */
+  #endif
 }
 
 /* ----------------------------------------------------------------------------

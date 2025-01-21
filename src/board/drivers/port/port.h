@@ -37,8 +37,8 @@
     }Irqc;
 
     typedef enum{
-        PIN_DISABLE,    //analog
-        ALTERNATIVE1,   //GPIO
+        PIN_DISABLE,    //
+        ALTERNATIVE1,   //
         ALTERNATIVE2,   //
         ALTERNATIVE3,   //
         ALTERNATIVE4,   //
