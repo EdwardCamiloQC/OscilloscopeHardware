@@ -18,3 +18,7 @@ void nvic_irqPriority(uint8_t ipr, VectorIrq irq, uint32_t priority){
         NVIC_IP(ipr) |= (~((uint32_t)(priority << (8*(irq%4)+6))) & (NVIC_IP(ipr))) | ((uint32_t)(priority << (8*(irq%4)+6)));
     }
 }
+
+void nvic_cleanFlagPending(VectorIrq irq){
+    NVIC_ICPR |= (uint32_t)(1 << irq);
+}

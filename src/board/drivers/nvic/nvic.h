@@ -37,4 +37,5 @@
     void nvic_irqEnable(VectorIrq irq);
     void nvic_irqDisable(uint8_t irq);
     void nvic_irqPriority(uint8_t ipr, uint8_t irq, uint32_t priority);
+    void nvic_cleanFlagPending(VectorIrq irq);
 #endif

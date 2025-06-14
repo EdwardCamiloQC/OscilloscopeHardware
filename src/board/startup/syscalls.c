@@ -4,16 +4,16 @@
 #include <sys/stat.h>
 
 extern int _end;
+extern int _Min_Heap_Size;
+static int *heap = &_end; //Inicio del heap
 
-void *_sbrk(int incr){
-    static unsigned char *heap = NULL;
-    unsigned char *prev_heap;
-    if(heap == NULL){
-        heap = (unsigned char *)&_end;
-    }
-    prev_heap = heap;
+void *_sbrk(ptrdiff_t incr){
+    int *prev_heap = heap;
     heap += incr;
-    return prev_heap;
+    if(heap >= &_end + _Min_Heap_Size){
+        return (void*)-1;
+    }
+    return (void*)prev_heap;
 }
 
 int _close(int file){

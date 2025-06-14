@@ -1,8 +1,8 @@
 #ifndef _SIM_H_
     #define _SIM_H_
 
-    #include <MKL25Z4.h>
     #include <stdbool.h>
+    #include <stdint.h>
     //-----------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------
     /*
@@ -229,6 +229,7 @@
         OUTDIV4_DIVIDE_BY_7,
         OUTDIV4_DIVIDE_BY_8
     }Outdiv4;
+
     void sim_systemClockDivider(Outdiv1 outdiv1, Outdiv4 outdiv4);
 
     //-----------------------------------------------------------------------------------
@@ -259,6 +260,7 @@
             0:  Normal mode
             1:  Windowed mode
     */
+
     void sim_controlRegister(Copt copt, bool copclks, bool copw);
 
     //-----------------------------------------------------------------------------------
@@ -267,6 +269,7 @@
         X55,    //write 0x55 and then 0xAA
         XAA
     }Srvcop;
+
     void sim_(Srvcop srvcop);
 
 #endif

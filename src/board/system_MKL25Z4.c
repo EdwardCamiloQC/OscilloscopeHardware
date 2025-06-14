@@ -108,9 +108,9 @@ void SystemInit (void) {
   #elif (CLOCK_SETUP == 1)
     sim_systemClock_portx_tsi_lptmr(PORTA, 1);//Enable portA and configure PTA18, PTA19 for the cristal
     sim_systemClockDivider(OUTDIV1_DIVIDE_BY_1, OUTDIV4_DIVIDE_BY_2); /* Update system prescalers */
-    port_pinControlRegisters(PORTA_BASE_PTR, 18, IRQ_DMA_DISABLE, PIN_DISABLE, LOW_DRIVE, FILTER_DISABLED, FAST_SLEW, DISABLED_PULL_RESISTOR, PULLDOWN);
+    port_pinControlRegisters(PORTA_BASE_PTR, 18, IRQ_DMA_DISABLE, ALTERNATIVE0, LOW_DRIVE, FILTER_DISABLED, FAST_SLEW, DISABLED_PULL_RESISTOR, PULLDOWN);
     port_cleanFlagISF(PORTA_BASE_PTR, 18);
-    port_pinControlRegisters(PORTA_BASE_PTR, 19, IRQ_DMA_DISABLE, PIN_DISABLE, LOW_DRIVE, FILTER_DISABLED, FAST_SLEW, DISABLED_PULL_RESISTOR, PULLDOWN);
+    port_pinControlRegisters(PORTA_BASE_PTR, 19, IRQ_DMA_DISABLE, ALTERNATIVE0, LOW_DRIVE, FILTER_DISABLED, FAST_SLEW, DISABLED_PULL_RESISTOR, PULLDOWN);
     port_cleanFlagISF(PORTA_BASE_PTR, 19);
     /*returnStatus =*/ mcg_preconfig();
     /*returnStatus =*/ mcg_fei_to_fbe();

@@ -1,8 +1,8 @@
 #include <port.h>
 
 void port_pinControlRegisters(PORT_MemMapPtr port, uint8_t pin, Irqc irqc, Mux mux, Dse dse, Pfe pfe, Sre sre, Pe pe, Ps ps){
-    uint32_t val = ((uint32_t)irqc << PORT_PCR_IRQC_SHIFT) | ((uint32_t)mux << PORT_PCR_MUX_SHIFT) | ((uint32_t)dse << PORT_PCR_DSE_SHIFT) | ((uint32_t)pfe << PORT_PCR_PFE_SHIFT) | ((uint32_t)sre << PORT_PCR_SRE_SHIFT) | ((uint32_t)pe << PORT_PCR_PE_SHIFT) |((uint32_t)ps << PORT_PCR_PS_SHIFT);
-    PORT_PCR_REG(port, pin) = ((uint32_t)PORT_PCR_REG(port, pin) & (uint32_t)PORT_PCR_ISF_MASK) | val;
+    PORT_PCR_REG(port, pin) = ((uint32_t)(~(PORT_PCR_ISF_MASK | PORT_PCR_IRQC_MASK | PORT_PCR_MUX_MASK | PORT_PCR_DSE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_SRE_MASK | PORT_PCR_PE_MASK | PORT_PCR_PS_MASK)) & PORT_PCR_REG(port, pin)) |
+        ((uint32_t)0<<PORT_PCR_ISF_SHIFT) | PORT_PCR_IRQC(irqc) | PORT_PCR_MUX(mux) | ((uint32_t)dse << PORT_PCR_DSE_SHIFT) | ((uint32_t)pfe << PORT_PCR_PFE_SHIFT) | ((uint32_t)sre << PORT_PCR_SRE_SHIFT) | ((uint32_t)pe << PORT_PCR_PE_SHIFT) |((uint32_t)ps << PORT_PCR_PS_SHIFT);
 }
 
 uint32_t port_interruptStatusFlag(PORT_MemMapPtr port, uint8_t pin){

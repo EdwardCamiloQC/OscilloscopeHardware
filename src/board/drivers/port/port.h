@@ -37,7 +37,7 @@
     }Irqc;
 
     typedef enum{
-        PIN_DISABLE,    //
+        ALTERNATIVE0 = 0,   //
         ALTERNATIVE1,   //
         ALTERNATIVE2,   //
         ALTERNATIVE3,   //
@@ -48,28 +48,28 @@
     }Mux;
 
     typedef enum{
-        LOW_DRIVE,      //low drive strength
+        LOW_DRIVE = 0,  //low drive strength
         HIGH_DRIVE      //high drive strength
     }Dse;
 
     typedef enum{
-        FILTER_DISABLED,    //passive input filter is disabled
-        FILTER_ENABLE       //passive input filter is enabled
+        FILTER_DISABLED = 0,    //passive input filter is disabled
+        FILTER_ENABLE           //passive input filter is enabled
     }Pfe;
 
     typedef enum{
-        FAST_SLEW,      //fast slew rate
+        FAST_SLEW = 0,  //fast slew rate
         SLOW_SLEW       //slow slew rate
     }Sre;
 
     typedef enum{
-        DISABLED_PULL_RESISTOR, //internal pullup or pulldown resistor is disabled
-        ENABLE_PULL_RESISTOR    //internal pullup or pulldown resistor is enabled
+        DISABLED_PULL_RESISTOR = 0, //internal pullup or pulldown resistor is disabled
+        ENABLE_PULL_RESISTOR        //internal pullup or pulldown resistor is enabled
     }Pe;
 
     typedef enum{
-        PULLDOWN,   //internal pulldown resistor is enabled
-        PULLUP      //internal pullup resistor is enabled
+        PULLDOWN = 0,   //internal pulldown resistor is enabled
+        PULLUP          //internal pullup resistor is enabled
     }Ps;
 
     void port_pinControlRegisters(PORT_MemMapPtr port, uint8_t pin, Irqc irqc, Mux mux, Dse dse, Pfe pfe, Sre sre, Pe pe, Ps ps);

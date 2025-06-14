@@ -1,4 +1,5 @@
 #include <sim.h>
+#include <MKL25Z4.h>
 
 void sim_systemOptionRegister1(bool usbregen, bool usbsstby, bool usbvstby, Osc32ksel osc32ksel){
     SIM_SOPT1 = ((uint32_t)usbregen << SIM_SOPT1_USBREGEN_SHIFT) | ((uint32_t)usbsstby << SIM_SOPT1_USBSSTBY_SHIFT) | ((uint32_t)usbvstby << SIM_SOPT1_USBVSTBY_SHIFT) | ((uint32_t)osc32ksel << SIM_SOPT1_OSC32KSEL_SHIFT);
