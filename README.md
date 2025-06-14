@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./17.png">
+    <img src="./13.png">
 </p>
 
 ## Descripcion
